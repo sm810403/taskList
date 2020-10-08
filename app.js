@@ -6,6 +6,8 @@ const filterInput = document.querySelector('.filter-input');
 const taskList = document.querySelector('ul');
 const clearBtn = document.querySelector('.clear-btn');
 
+
+
 //load all events
 loadEvents();
 
@@ -16,8 +18,17 @@ function loadEvents(){
     //clear tasks
     clearBtn.addEventListener('click', clearTasks);
     //filter tasks
-    filterInput.addEventListener('keyup', filterTasks)
-
+    filterInput.addEventListener('keyup', filterTasks);
+    //delete list
+    taskList.addEventListener('click', deleteTasks);
+}
+//delete tasks
+function deleteTasks(e){
+    if(e.target.parentElement.classList.contains('link')){
+        if(confirm('Are You Sure?')){
+        e.target.parentElement.parentElement.remove();
+        }
+    }
 }
 
 //add task into lists
@@ -45,12 +56,13 @@ function clearTasks(){
 //filter Tasks
 function filterTasks(e){
     const filterValue = e.target.value.toLowerCase();
-    const liValue = document.querySelectorAll('.list');
-    liValue.forEach(list =>{
-        if(filterValue === list.textContent){
-            taskList.style.display = 'block';
+    const lists = document.querySelectorAll('.list');
+    lists.forEach(list =>{
+        const item = list.firstChild.textContent;
+        if(item.toLowerCase().indexOf(filterValue) != -1){
+            list.style.display = 'block';
         } else {
-            taskList.style.display = 'none';
+            list.style.display = 'none';
         }
     })
 }

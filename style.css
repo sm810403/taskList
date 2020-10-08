@@ -62,6 +62,7 @@ hr {
     box-shadow: 3px 5px 10px rgba(0,0,0,0.4), 4px 7px 12px rgba(0,0,0,0.2);
     padding: 10px;
     margin: 10px 0;
+    position: relative;
 }
 .clear-btn{
     text-decoration: none;
@@ -93,10 +94,13 @@ hr {
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
+    position: relative;
 }
 a {
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    position: absolute;
+    right: 10px;
 }
 i{
     cursor: pointer;
