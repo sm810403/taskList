@@ -21,14 +21,42 @@ function loadEvents(){
     filterInput.addEventListener('keyup', filterTasks);
     //delete list
     taskList.addEventListener('click', deleteTasks);
+    //load tasks 
+    document.addEventListener('DOMContentLoaded', loadTasks);
 }
+//load tasks
+function loadTasks(taskItem){
+    let tasks;
+    if(localStorage.getItem('tasks') === null){
+        tasks = [];
+    } else {
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+    }
+    tasks.forEach(task =>{
+        const li = document.createElement('li');
+        li.className = 'list';
+        li.appendChild(document.createTextNode(task));
+        const link = document.createElement('a');
+        link.className = 'link';
+        link.innerHTML = `<i class="far fa-times-circle"></i>`;
+        li.appendChild(link);
+        taskList.appendChild(li);
+    })
+}
+
 //delete tasks
 function deleteTasks(e){
     if(e.target.parentElement.classList.contains('link')){
         if(confirm('Are You Sure?')){
         e.target.parentElement.parentElement.remove();
+        //remove tasks from LS
+        removeTaskFromLS(e.target.parentElement.parentElement)
         }
     }
+}
+//remove tasks from LS
+function removeTaskFromLS(taskEl){
+    
 }
 
 //add task into lists
