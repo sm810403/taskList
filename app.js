@@ -9,10 +9,10 @@ const clearBtn = document.querySelector('.clear-btn');
 
 
 //load all events
-loadEvents();
+loadEventListener();
 
 //all events
-function loadEvents(){
+function loadEventListener(){
     //submit tasks into lists
     form.addEventListener('submit', addTasks);
     //clear tasks
@@ -22,10 +22,10 @@ function loadEvents(){
     //delete list
     taskList.addEventListener('click', deleteTasks);
     //load tasks 
-    document.addEventListener('DOMContentLoaded', loadTasks);
+    document.addEventListener('DOMContentLoaded', setTasks);
 }
-//load tasks
-function loadTasks(taskItem){
+//set tasks into UI from storage
+function setTasks(taskItem){
     let tasks;
     if(localStorage.getItem('tasks') === null){
         tasks = [];
@@ -55,8 +55,17 @@ function deleteTasks(e){
     }
 }
 //remove tasks from LS
-function removeTaskFromLS(taskEl){
-    
+function removeTaskFromLS(task){
+    let tasks;
+    if(localStorage.getItem('tasks') === null){
+        tasks = [];
+    } else {
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+    }
+    tasks.forEach(task =>{
+        tasks.remove(task);
+    })
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 //add task into lists
@@ -90,8 +99,15 @@ function storeTaskIntoLocalStorage(task){
 //clear tasks
 function clearTasks(){
     while(taskList.firstChild){
-        taskList.firstChild.remove();
+        taskList.removeChild(taskList.firstChild);
+        filterInput.value = '';
     }
+    clearTasksFromLS();
+
+}
+//clear tasks from LS
+function clearTasksFromLS(){
+    localStorage.clear();
 }
 //filter Tasks
 function filterTasks(e){
