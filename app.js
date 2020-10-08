@@ -28,6 +28,10 @@ function addTasks(e){
         const li = document.createElement('li');
         li.className = 'list';
         li.appendChild(document.createTextNode(inputValue));
+        const link = document.createElement('a');
+        link.className = 'link';
+        link.innerHTML = `<i class="far fa-times-circle"></i>`;
+        li.appendChild(link);
         taskList.appendChild(li);
         taskInput.value = '';
     }
@@ -43,7 +47,7 @@ function filterTasks(e){
     const filterValue = e.target.value.toLowerCase();
     const liValue = document.querySelectorAll('.list');
     liValue.forEach(list =>{
-        if(filterValue === list{
+        if(filterValue === list.textContent){
             taskList.style.display = 'block';
         } else {
             taskList.style.display = 'none';

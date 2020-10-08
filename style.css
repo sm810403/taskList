@@ -86,9 +86,24 @@ hr {
 .list{
     font-size: 20px;
     margin: 5px;
-    padding: 5px;
+    padding: 5px 10px;
     list-style: none;
     background-color: #4d4d4d;
     color: white;
     border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+a {
+    display: flex;
+    align-items: center;
+}
+i{
+    cursor: pointer;
+}
+i:hover{
+    opacity: 0.5;
+}
+i:active{
+    color: black;
 }
