@@ -44,8 +44,20 @@ function addTasks(e){
         link.innerHTML = `<i class="far fa-times-circle"></i>`;
         li.appendChild(link);
         taskList.appendChild(li);
+        storeTaskIntoLocalStorage(inputValue);
         taskInput.value = '';
     }
+}
+//store tasks into LS
+function storeTaskIntoLocalStorage(task){
+    let tasks;
+    if(localStorage.getItem('tasks') === null){
+        tasks = [];
+    } else {
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+    }
+    tasks.push(task);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 //clear tasks
 function clearTasks(){
