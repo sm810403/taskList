@@ -110,7 +110,9 @@ function clearTasks(){
 }
 //clear tasks from LS
 function clearTasksFromLS(){
+    if (confirm('Are You Really Sure?')){
     localStorage.clear();
+    }
 }
 //filter Tasks
 function filterTasks(e){
